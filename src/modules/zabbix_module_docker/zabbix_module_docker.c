@@ -760,7 +760,12 @@ int     zbx_docker_dir_detect()
                 driver = "";
                 zabbix_log(LOG_LEVEL_DEBUG, "Cannot detect used docker driver");
                 return SYSINFO_RET_FAIL;
+            } else
+            {
+                    zabbix_log(LOG_LEVEL_DEBUG, "Not entering here strstr(path, 'cpuset cgroup')");
+                    SET_MSG_RESULT(result, zbx_strdup(NULL, "Not entering here strstr(path, 'cpuset cgroup')"));
             }
+            
         }
         pclose(fp);
         zabbix_log(LOG_LEVEL_DEBUG, "Cannot detect docker stat directory");

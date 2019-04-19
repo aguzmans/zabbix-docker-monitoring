@@ -763,7 +763,7 @@ int     zbx_docker_dir_detect()
             } else
             {
                     zabbix_log(LOG_LEVEL_DEBUG, "Not entering here strstr(path, 'cpuset cgroup')");
-                    SET_MSG_RESULT(result, zbx_strdup(NULL, "Not entering here strstr(path, 'cpuset cgroup')"));
+                    // SET_MSG_RESULT(result, zbx_strdup(NULL, "Not entering here strstr(path, 'cpuset cgroup')"));
             }
             
         }

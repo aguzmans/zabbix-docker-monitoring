@@ -760,12 +760,7 @@ int     zbx_docker_dir_detect()
                 driver = "";
                 zabbix_log(LOG_LEVEL_DEBUG, "Cannot detect used docker driver");
                 return SYSINFO_RET_FAIL;
-            } else
-            {
-                    zabbix_log(LOG_LEVEL_DEBUG, "Not entering here strstr(path, 'cpuset cgroup')");
-                    // SET_MSG_RESULT(result, zbx_strdup(NULL, "Not entering here strstr(path, 'cpuset cgroup')"));
             }
-            
         }
         pclose(fp);
         zabbix_log(LOG_LEVEL_DEBUG, "Cannot detect docker stat directory");
@@ -785,8 +780,7 @@ int     zbx_module_docker_up(AGENT_REQUEST *request, AGENT_RESULT *result)
 {
         zabbix_log(LOG_LEVEL_DEBUG, "In zbx_module_docker_up()");
         char    *container;
-        abbix_log(LOG_LEVEL_DEBUG, "docker.up we are here!");
-        SET_MSG_RESULT(result, zbx_strdup(NULL, "docker.up we are here!"));
+
         if (1 != request->nparam)
         {
                 zabbix_log(LOG_LEVEL_ERR, "Invalid number of parameters: %d",  request->nparam);
@@ -801,15 +795,15 @@ int     zbx_module_docker_up(AGENT_REQUEST *request, AGENT_RESULT *result)
                 return SYSINFO_RET_FAIL;
         }
 
-        if(cpu_cgroup == NULL)
-        {
-                if (zbx_docker_dir_detect() == SYSINFO_RET_FAIL)
-                {
-                    zabbix_log(LOG_LEVEL_DEBUG, "docker.up check is not available at the moment - no cpu_cgroup directory");
-                    SET_MSG_RESULT(result, zbx_strdup(NULL, "docker.up check is not available at the moment - no cpu_cgroup directory"));
-                    return SYSINFO_RET_FAIL;
-                }
-        }
+        // if(cpu_cgroup == NULL)
+        // {
+        //         if (zbx_docker_dir_detect() == SYSINFO_RET_FAIL)
+        //         {
+        //             zabbix_log(LOG_LEVEL_DEBUG, "docker.up check is not available at the moment - no cpu_cgroup directory");
+        //             SET_MSG_RESULT(result, zbx_strdup(NULL, "docker.up check is not available at the moment - no cpu_cgroup directory"));
+        //             return SYSINFO_RET_FAIL;
+        //         }
+        // }
 
         container = zbx_module_docker_get_fci(get_rparam(request, 0));
         char    *stat_file = "/cpuacct.stat";
